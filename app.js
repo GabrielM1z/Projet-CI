@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+require('dotenv').config(); // Charger les variables d'environnement depuis .env
 
 // Créer une instance de l'application express
 const app = express();
@@ -62,6 +63,27 @@ app.get('/meme', async (req, res) => {
 
 app.get('/planet', (req, res) => {
   res.json({ planet: "Tatooine" });
+});
+
+// Route /plane pour récupérer les données avec la clé API
+app.get('/plane', async (req, res) => {
+  try {
+    // Récupérer la clé API depuis les variables d'environnement
+    const apiKey = process.env.API_KEY;
+    // Vérifier si la clé API est présente
+    if (!apiKey) {
+      return res.status(500).json({ error: 'Clé API manquante' });
+    }
+
+    // Faire l'appel à l'API avec la clé récupérée
+    const response = await axios.get(`https://random-data-api.com/api/v3/projects/856b2ec7-ca72-4d5e-b1aa-505afe3f40d5?api_key=${apiKey}`);
+
+    // Retourner la réponse de l'API
+    res.json(response.data);
+  } catch (error) {
+    console.error("Erreur lors de l'appel à l'API /plane:", error);
+    res.status(500).json({ error: 'Erreur interne de serveur' });
+  }
 });
 
 // Exporter l'application pour l'utiliser dans le fichier www
