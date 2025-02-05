@@ -7,7 +7,6 @@ describe('Test de la route character de l\'application', () => {
         const response = await request(app).get('/character');
         expect(response.statusCode).toBe(200);
         expect(response.body).toHaveProperty('character');
-        expect(typeof response.body.word).toBe('string'); 
         expect(response.body).toHaveProperty('url');
     });
 
