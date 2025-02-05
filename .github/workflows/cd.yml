@@ -24,14 +24,14 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t monrepo/randomgeekgenerator:${{ github.sha }} .
+          docker build -t gabazoo/randomgeekgenerator:${{ github.sha }} .
 
       - name: Push Docker image (commit SHA)
         run: |
-          docker push monrepo/randomgeekgenerator:${{ github.sha }}
+          docker push gabazoo/randomgeekgenerator:${{ github.sha }}
 
       - name: Push Docker image (latest)
         if: github.ref == 'refs/heads/main'
         run: |
-          docker tag monrepo/randomgeekgenerator:${{ github.sha }} monrepo/randomgeekgenerator:latest
-          docker push monrepo/randomgeekgenerator:latest
+          docker tag gabazoo/randomgeekgenerator:${{ github.sha }} monrepo/randomgeekgenerator:latest
+          docker push gabazoo/randomgeekgenerator:latest
