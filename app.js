@@ -1,49 +1,36 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
 
-// Créer le serveur HTTP
-const server = http.createServer((req, res) => {
-  // Définir les en-têtes de la réponse
-  res.setHeader('Content-Type', 'application/json');
-  
-  // Gérer les différentes routes
-  if (req.url === '/quote' && req.method === 'GET') {
-    // Simuler une citation geek
-    res.statusCode = 200;
-    res.end(JSON.stringify({ quote: "La programmation, c'est de l'art, mais sans la beauté." }));
-  } else if (req.url === '/character' && req.method === 'GET') {
-    // Simuler un personnage
-    res.statusCode = 200;
-    res.end(JSON.stringify({ character: "Rick Sanchez (Rick and Morty)" }));
-  } else if (req.url === '/meme' && req.method === 'GET') {
-    // Simuler un mème
-    res.statusCode = 200;
-    res.end(JSON.stringify({ meme: "https://imgflip.com/s/meme/Mocking-Spongebob.jpg" }));
-  } else if (req.url === '/planet' && req.method === 'GET') {
-    // Simuler un nom de planète
-    res.statusCode = 200;
-    res.end(JSON.stringify({ planet: "Tatooine" }));
-  } else if (req.url === '/' && req.method === 'GET') {
-    // Servir le fichier HTML
-    fs.readFile(path.join(__dirname, 'index.html'), (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.end('Erreur du serveur');
-        return;
-      }
-      res.statusCode = 200;
-      res.end(data);
-    });
-  } else {
-    // Page non trouvée
-    res.statusCode = 404;
-    res.end(JSON.stringify({ error: "Page non trouvée" }));
-  }
+// Créer une instance de l'application express
+const app = express();
+
+// Configurer le dossier public pour les fichiers statiques (CSS, images, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Définir le moteur de rendu (optionnel si vous utilisez juste HTML)
+app.set('view engine', 'ejs'); // Si tu veux utiliser ejs. Sinon, tu peux omettre cela pour HTML pur.
+
+// Route pour la page d'accueil
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// Lancer le serveur
-const port = 8080;
-server.listen(port, () => {
-  console.log(`Le serveur écoute sur http://localhost:${port}`);
+// Configuration des routes pour les requêtes
+app.get('/quote', (req, res) => {
+  res.json({ quote: "La programmation, c'est de l'art, mais sans la beauté." });
 });
+
+app.get('/character', (req, res) => {
+  res.json({ character: "Rick Sanchez (Rick and Morty)" });
+});
+
+app.get('/meme', (req, res) => {
+  res.json({ meme: "https://imgflip.com/s/meme/Mocking-Spongebob.jpg" });
+});
+
+app.get('/planet', (req, res) => {
+  res.json({ planet: "Tatooine" });
+});
+
+// Exporter l'application pour l'utiliser dans le fichier www
+module.exports = app;
