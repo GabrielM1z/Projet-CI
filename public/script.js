@@ -5,11 +5,10 @@ document.getElementById('quoteButton').addEventListener('click', async () => {
 });
 
 document.getElementById('characterButton').addEventListener('click', async () => {
+    console.log("Recu")
     const response = await fetch('/character');
     const data = await response.json();
-
-    console.log("Ca merche")
-    console.log(data)
+    console.log("Attente termine")
     
     const characterResult = document.getElementById('characterResult');
     characterResult.innerHTML = '';
@@ -23,6 +22,7 @@ document.getElementById('characterButton').addEventListener('click', async () =>
     img.style.maxWidth = '100%'; // Définir la largeur maximale
 
     // Ajouter l'image sans supprimer le texte
+    characterResult.appendChild(document.createElement('br')); 
     characterResult.appendChild(img);
 });
 
