@@ -1,60 +1,36 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Créer une instance de l'application express
+const app = express();
 
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// Configurer le dossier public pour les fichiers statiques (CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+// Définir le moteur de rendu (optionnel si vous utilisez juste HTML)
+app.set('view engine', 'ejs'); // Si tu veux utiliser ejs. Sinon, tu peux omettre cela pour HTML pur.
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+// Route pour la page d'accueil
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+// Configuration des routes pour les requêtes
+app.get('/quote', (req, res) => {
+  res.json({ quote: "La programmation, c'est de l'art, mais sans la beauté." });
 });
 
+app.get('/character', (req, res) => {
+  res.json({ character: "Rick Sanchez (Rick and Morty)" });
+});
 
+app.get('/meme', (req, res) => {
+  res.json({ meme: "https://imgflip.com/s/meme/Mocking-Spongebob.jpg" });
+});
+
+app.get('/planet', (req, res) => {
+  res.json({ planet: "Tatooine" });
+});
+
+// Exporter l'application pour l'utiliser dans le fichier www
 module.exports = app;
