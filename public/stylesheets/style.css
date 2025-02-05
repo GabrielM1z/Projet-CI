@@ -15,13 +15,21 @@ header {
 
 main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 20px auto;
 }
 
 .section {
-  margin-bottom: 20px;
+  flex: 1 1 20%; /* Ajusté pour 4 éléments par ligne */
+  max-width: 23%; /* On garde la même largeur pour 4 éléments */
+  min-width: 200px; /* Pour éviter que les éléments deviennent trop petits */
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
