@@ -26,9 +26,11 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.sha }} .
 
-      - name: Push Docker image (commit SHA)
+      - name: Push Docker image (release tag)
+        if: github.event_name == 'release'
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.sha }}
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.event.release.tag_name }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.event.release.tag_name }}
 
       - name: Push Docker image (latest)
         if: github.ref == 'refs/heads/main'
