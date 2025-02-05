@@ -11,6 +11,7 @@ COPY . .
 
 # Définir la variable d'environnement (clé API passée au runtime)
 ENV PORT=8080
+ENV API_KEY=${API_KEY}
 
 # Exposer le port
 EXPOSE 8080
