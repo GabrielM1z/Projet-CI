@@ -1,6 +1,6 @@
 const express = require('express');
+const axios = require('axios');
 const path = require('path');
-const axios = require('axios'); // Importer axios pour effectuer des appels API
 
 // Créer une instance de l'application express
 const app = express();
@@ -35,8 +35,20 @@ app.get('/character', (req, res) => {
   res.json({ character: "Rick Sanchez (Rick and Morty)" });
 });
 
-app.get('/meme', (req, res) => {
-  res.json({ meme: "https://imgflip.com/s/meme/Mocking-Spongebob.jpg" });
+app.get('/meme', async (req, res) => {
+  try {
+    // Faire l'appel API à Meme API (https://meme-api.com/gimme)
+    const response = await axios.get('https://meme-api.com/gimme');
+    
+    // La réponse contient l'URL du mème
+    const memeUrl = response.data.url;
+
+    // Renvoyer le mème sous forme de JSON
+    res.json({ meme: memeUrl });
+  } catch (error) {
+    console.error("Erreur lors de l'appel à l'API Meme API:", error);
+    res.status(500).json({ error: 'Erreur interne de serveur' });
+  }
 });
 
 app.get('/planet', (req, res) => {
