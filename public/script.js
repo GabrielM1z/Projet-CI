@@ -5,10 +5,8 @@ document.getElementById('quoteButton').addEventListener('click', async () => {
 });
 
 document.getElementById('characterButton').addEventListener('click', async () => {
-    console.log("Recu")
     const response = await fetch('/character');
     const data = await response.json();
-    console.log("Attente termine")
     
     const characterResult = document.getElementById('characterResult');
     characterResult.innerHTML = '';
@@ -43,10 +41,11 @@ document.getElementById('memeButton').addEventListener('click', async () => {
     memeResult.appendChild(img); // Ajouter la nouvelle image
 });
 
-document.getElementById('planetButton').addEventListener('click', async () => {
-    const response = await fetch('/planet');
+document.getElementById('planeButton').addEventListener('click', async () => {
+    const response = await fetch('/plane');
     const data = await response.json();
-    document.getElementById('planetResult').textContent = data.planet;
+    document.getElementById('planeResult').textContent = data.airline_name;
+    document.getElementById('numplaneResult').textContent = data.airline_flight_number;
 });
 
 document.getElementById('generalButton').addEventListener('click', async () => {
