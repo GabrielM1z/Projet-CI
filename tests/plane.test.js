@@ -4,7 +4,7 @@ const app = require('../app');
 describe('Test de la route plane de l\'application', () => {
 
 
-    test("GET /plane doit retourner 200 et contient une compagnie et un vol", async () => {
+    test("GET /plane doit retourner 200 et contient une compagnie & un vol", async () => {
         const response = await request(app).get('/plane');
         expect(response.statusCode).toBe(200);
         expect(response.body).toHaveProperty('airline_flight_number');
