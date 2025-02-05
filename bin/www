@@ -10,6 +10,7 @@ const port = normalizePort(process.env.PORT || '8080');
 // Création du serveur HTTP avec l'application Express
 const server = http.createServer(app);
 
+
 // Écoute du serveur sur le port spécifié
 server.listen(port);
 server.on('error', onError);

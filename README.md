@@ -3,7 +3,7 @@
 Une web app simple qui génère du contenu aléatoire sur des thèmes geeks grâce à des APIs externes.
 
 ## 🚀 Fonctionnalités
-- **Citation geek aléatoire** : Obtenez une citation inspirante ou drôle sur la culture geek grâce à [They Said So API](https://theysaidso.com/).
+- **Inspiration de pseudo** : Obtenez des mots au hasard, inspirante ou drôle grâce à [Random Word API](https://random-word-api.herokuapp.com/word?number=1).
 - **Personnage aléatoire** : Générez un personnage de **Rick and Morty** ou **Star Wars** via [Rick and Morty API](https://rickandmortyapi.com/) et [SWAPI](https://swapi.dev/).
 - **Mème aléatoire** : Récupérez un mème populaire via [Imgflip API](https://imgflip.com/api).
 - **Nom de planète SF aléatoire** : Découvrez un nom de planète fictive grâce à [Random Data API](https://random-data-api.com/).
@@ -27,7 +27,7 @@ Une web app simple qui génère du contenu aléatoire sur des thèmes geeks grâ
 ## 🔗 Endpoints de l'API
 | Méthode | Endpoint           | Description |
 |---------|------------------|-------------|
-| GET     | /quote           | Retourne une citation geek aléatoire. |
+| GET     | /quote           | Retourne un mot geek aléatoire, généré pour évoquer un concept geek. |
 | GET     | /character       | Retourne un personnage aléatoire (Rick & Morty ou Star Wars). |
 | GET     | /meme            | Retourne un mème geek aléatoire. |
 | GET     | /planet          | Retourne un nom de planète SF aléatoire. |
