@@ -4,22 +4,21 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('node-js-sample:server');
-var http = require('http');
+const http = require('http');
+const debug = require('debug')('node-js-sample:server');
+const app = require('../app'); // Ton fichier app.js modifié pour Node natif
 
 /**
- * Get port from environment and store in Express.
+ * Get port from environment.
  */
 
-var port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
+const port = normalizePort(process.env.PORT || '8080');
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -34,15 +33,15 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe
+    // Si ce n'est pas un nombre, c'est un nom de pipe
     return val;
   }
 
   if (port >= 0) {
-    // port number
+    // Si c'est un nombre valide
     return port;
   }
 
@@ -58,11 +57,11 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  const bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
+  // Gérer les erreurs de l'écoute
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
@@ -82,8 +81,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  const addr = server.address();
+  const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
