@@ -26,6 +26,10 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.sha }} .
 
+      - name: Run tests in Docker container
+        run: |
+          docker run --rm -e API_KEY=${{ secrets.API_KEY }} ${{ secrets.DOCKERHUB_USERNAME }}/randomgeekgenerator:${{ github.sha }} npm test
+
       - name: Push Docker image (release tag)
         if: github.event_name == 'release'
         run: |
