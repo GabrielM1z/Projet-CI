@@ -31,8 +31,17 @@ app.get('/quote', async (req, res) => {
 });
 
 
-app.get('/character', (req, res) => {
-  res.json({ character: "Rick Sanchez (Rick and Morty)" });
+app.get('/character', async (req, res) => {
+  try {
+    const randomId = Math.floor(Math.random() * 826) + 1; // Nombre entre 1 et 826
+    const response = await axios.get(`https://rickandmortyapi.com/api/character/${randomId}`);
+    const character = response.data;
+    
+    res.json({ character: `${character.name}, ${character.species}`, url: `${character.image}` });
+  } catch (error) {
+    console.error("Erreur lors de la récupération du personnage :", error);
+    res.status(500).json({ error: "Impossible de récupérer un personnage" });
+  }
 });
 
 app.get('/meme', async (req, res) => {
