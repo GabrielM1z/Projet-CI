@@ -5,9 +5,25 @@ document.getElementById('quoteButton').addEventListener('click', async () => {
 });
 
 document.getElementById('characterButton').addEventListener('click', async () => {
+    console.log("Recu")
     const response = await fetch('/character');
     const data = await response.json();
-    document.getElementById('characterResult').textContent = data.character;
+    console.log("Attente termine")
+    
+    const characterResult = document.getElementById('characterResult');
+    characterResult.innerHTML = '';
+    characterResult.textContent = data.character; // Utiliser le texte récupéré dans le JSON
+
+    // Créer un élément image
+    const img = document.createElement('img');
+    img.src = data.url; // Utiliser l'URL de l'image récupérée
+    img.alt = 'Perso aléatoire'; // Texte alternatif pour l'image
+    img.style.maxHeight = '300px'; // Définir la hauteur maximale
+    img.style.maxWidth = '100%'; // Définir la largeur maximale
+
+    // Ajouter l'image sans supprimer le texte
+    characterResult.appendChild(document.createElement('br')); 
+    characterResult.appendChild(img);
 });
 
 document.getElementById('memeButton').addEventListener('click', async () => {
