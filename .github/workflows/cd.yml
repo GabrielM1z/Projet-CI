@@ -30,7 +30,7 @@ jobs:
           docker push monrepo/randomgeekgenerator:${{ github.sha }}
 
       - name: Push Docker image (latest)
-          if: github.ref == 'refs/heads/main'
-          run: |
-            docker tag monrepo/randomgeekgenerator:${{ github.sha }} monrepo/randomgeekgenerator:latest
-            docker push monrepo/randomgeekgenerator:latest
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker tag monrepo/randomgeekgenerator:${{ github.sha }} monrepo/randomgeekgenerator:latest
+          docker push monrepo/randomgeekgenerator:latest
