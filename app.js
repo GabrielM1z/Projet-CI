@@ -1,60 +1,49 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/users', users);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+// Créer le serveur HTTP
+const server = http.createServer((req, res) => {
+  // Définir les en-têtes de la réponse
+  res.setHeader('Content-Type', 'application/json');
+  
+  // Gérer les différentes routes
+  if (req.url === '/quote' && req.method === 'GET') {
+    // Simuler une citation geek
+    res.statusCode = 200;
+    res.end(JSON.stringify({ quote: "La programmation, c'est de l'art, mais sans la beauté." }));
+  } else if (req.url === '/character' && req.method === 'GET') {
+    // Simuler un personnage
+    res.statusCode = 200;
+    res.end(JSON.stringify({ character: "Rick Sanchez (Rick and Morty)" }));
+  } else if (req.url === '/meme' && req.method === 'GET') {
+    // Simuler un mème
+    res.statusCode = 200;
+    res.end(JSON.stringify({ meme: "https://imgflip.com/s/meme/Mocking-Spongebob.jpg" }));
+  } else if (req.url === '/planet' && req.method === 'GET') {
+    // Simuler un nom de planète
+    res.statusCode = 200;
+    res.end(JSON.stringify({ planet: "Tatooine" }));
+  } else if (req.url === '/' && req.method === 'GET') {
+    // Servir le fichier HTML
+    fs.readFile(path.join(__dirname, 'index.html'), (err, data) => {
+      if (err) {
+        res.statusCode = 500;
+        res.end('Erreur du serveur');
+        return;
+      }
+      res.statusCode = 200;
+      res.end(data);
     });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  } else {
+    // Page non trouvée
+    res.statusCode = 404;
+    res.end(JSON.stringify({ error: "Page non trouvée" }));
+  }
 });
 
-
-module.exports = app;
+// Lancer le serveur
+const port = 8080;
+server.listen(port, () => {
+  console.log(`Le serveur écoute sur http://localhost:${port}`);
+});
