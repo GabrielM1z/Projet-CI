@@ -13,7 +13,18 @@ document.getElementById('characterButton').addEventListener('click', async () =>
 document.getElementById('memeButton').addEventListener('click', async () => {
     const response = await fetch('/meme');
     const data = await response.json();
-    document.getElementById('memeResult').textContent = data.meme;
+
+    // Créer un élément image
+    const img = document.createElement('img');
+    img.src = data.meme; // Utiliser l'URL de l'image récupérée
+    img.alt = 'Mème aléatoire'; // Texte alternatif pour l'image
+    img.style.maxHeight = '300px'; // Définir la hauteur maximale
+    img.style.maxWidth = '100%'; // Définir la largeur maximale
+
+    // Ajouter l'image au conteneur de résultat
+    const memeResult = document.getElementById('memeResult');
+    memeResult.innerHTML = ''; // Effacer tout contenu précédent
+    memeResult.appendChild(img); // Ajouter la nouvelle image
 });
 
 document.getElementById('planetButton').addEventListener('click', async () => {
