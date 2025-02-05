@@ -1,7 +1,7 @@
 document.getElementById('quoteButton').addEventListener('click', async () => {
     const response = await fetch('/quote');
     const data = await response.json();
-    document.getElementById('quoteResult').textContent = data.quote;
+    document.getElementById('quoteResult').textContent = data.word;
 });
 
 document.getElementById('characterButton').addEventListener('click', async () => {

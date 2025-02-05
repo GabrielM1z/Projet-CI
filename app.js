@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const axios = require('axios'); // Importer axios pour effectuer des appels API
 
 // Créer une instance de l'application express
 const app = express();
@@ -15,10 +16,20 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// Configuration des routes pour les requêtes
-app.get('/quote', (req, res) => {
-  res.json({ quote: "La programmation, c'est de l'art, mais sans la beauté." });
+// Configuration des routes
+app.get('/quote', async (req, res) => {
+  try {
+    // Faire un appel à l'API Random Word pour obtenir un mot aléatoire
+    const response = await axios.get('https://random-word-api.herokuapp.com/word?number=1&lang=fr');
+
+    // Retourner le mot obtenu depuis l'API
+    res.json({ word: response.data[0] });
+  } catch (error) {
+    console.error('Error fetching word:', error);
+    res.json({ word: "Erreur lors de la récupération du mot." });
+  }
 });
+
 
 app.get('/character', (req, res) => {
   res.json({ character: "Rick Sanchez (Rick and Morty)" });
