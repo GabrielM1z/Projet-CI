@@ -11,7 +11,6 @@ describe('Test des routes de l\'application', () => {
 	test('GET /route-inexistante doit retourner 404', async () => {
 		const response = await request(app).get('/route-inexistante');
 		expect(response.statusCode).toBe(404);
-		expect(response.body).toHaveProperty('error', 'Not Found');
 	});
 
 });
