@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
-const axios = require('axios'); // Importer axios pour effectuer des appels API
 
 // Créer une instance de l'application express
 const app = express();
