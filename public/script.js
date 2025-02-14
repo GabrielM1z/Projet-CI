@@ -53,3 +53,34 @@ document.getElementById('nameButton').addEventListener('click', async () => {
     const data = await response.json();
     document.getElementById('nameResult').textContent = data.full_name;
 });
+
+document.getElementById('cityButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('cityResult').textContent = data.city;
+});
+
+document.getElementById('jobButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('jobResult').textContent = data.job_title;
+});
+
+
+document.getElementById('dobButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('dobResult').textContent = data.birthday;
+});
+
+document.getElementById('creditCardButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('creditCardResult').textContent = data.card_number;
+});
+
+document.getElementById('phoneButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('phoneResult').textContent = data.phone_number;
+});
