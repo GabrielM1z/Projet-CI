@@ -13,6 +13,8 @@ describe('Test de la route data de l\'application', () => {
         expect(typeof response.body.airline_name).toBe('string');
         expect(response.body).toHaveProperty('full_name');
         expect(typeof response.body.full_name).toBe('string');
+        expect(response.body).toHaveProperty('city');
+        expect(typeof response.body.city).toBe('string');
     });
 
 });
