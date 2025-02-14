@@ -57,5 +57,5 @@ document.getElementById('nameButton').addEventListener('click', async () => {
 document.getElementById('cityButton').addEventListener('click', async () => {
     const response = await fetch('/data');
     const data = await response.json();
-    document.getElementById('cityResult').textContent = data.full_name;
+    document.getElementById('cityResult').textContent = data.city;
 });
