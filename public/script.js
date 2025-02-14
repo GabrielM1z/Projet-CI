@@ -53,3 +53,9 @@ document.getElementById('nameButton').addEventListener('click', async () => {
     const data = await response.json();
     document.getElementById('nameResult').textContent = data.full_name;
 });
+
+document.getElementById('cityButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('cityResult').textContent = data.full_name;
+});
