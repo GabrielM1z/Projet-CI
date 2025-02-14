@@ -58,6 +58,7 @@ document.getElementById('cityButton').addEventListener('click', async () => {
     const response = await fetch('/data');
     const data = await response.json();
     document.getElementById('cityResult').textContent = data.city;
+
 });
 
 document.getElementById('jobButton').addEventListener('click', async () => {
@@ -83,4 +84,5 @@ document.getElementById('phoneButton').addEventListener('click', async () => {
     const response = await fetch('/data');
     const data = await response.json();
     document.getElementById('phoneResult').textContent = data.phone_number;
+
 });

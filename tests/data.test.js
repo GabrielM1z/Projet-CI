@@ -15,6 +15,7 @@ describe('Test de la route data de l\'application', () => {
         expect(typeof response.body.full_name).toBe('string');
         expect(response.body).toHaveProperty('city');
         expect(typeof response.body.city).toBe('string');
+
         expect(response.body).toHaveProperty('job_title');
         expect(typeof response.body.job_title).toBe('string');
         expect(response.body).toHaveProperty('birthday');
@@ -23,6 +24,7 @@ describe('Test de la route data de l\'application', () => {
         expect(typeof response.body.card_number).toBe('string');
         expect(response.body).toHaveProperty('phone_number');
         expect(typeof response.body.phone_number).toBe('string');
+
     });
 
 });
