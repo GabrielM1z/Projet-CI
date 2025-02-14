@@ -7,7 +7,7 @@ document.getElementById('quoteButton').addEventListener('click', async () => {
 document.getElementById('characterButton').addEventListener('click', async () => {
     const response = await fetch('/character');
     const data = await response.json();
-    
+
     const characterResult = document.getElementById('characterResult');
     characterResult.innerHTML = '';
     characterResult.textContent = data.character; // Utiliser le texte récupéré dans le JSON
@@ -20,7 +20,7 @@ document.getElementById('characterButton').addEventListener('click', async () =>
     img.style.maxWidth = '100%'; // Définir la largeur maximale
 
     // Ajouter l'image sans supprimer le texte
-    characterResult.appendChild(document.createElement('br')); 
+    characterResult.appendChild(document.createElement('br'));
     characterResult.appendChild(img);
 });
 
@@ -42,13 +42,14 @@ document.getElementById('memeButton').addEventListener('click', async () => {
 });
 
 document.getElementById('planeButton').addEventListener('click', async () => {
-    const response = await fetch('/plane');
+    const response = await fetch('/data');
     const data = await response.json();
     document.getElementById('planeResult').textContent = data.airline_name;
     document.getElementById('numplaneResult').textContent = data.airline_flight_number;
 });
 
-document.getElementById('generalButton').addEventListener('click', async () => {
-    // Vous pouvez ajouter une logique pour générer un élément aléatoire ici
-    alert("Génération aléatoire !");
+document.getElementById('nameButton').addEventListener('click', async () => {
+    const response = await fetch('/data');
+    const data = await response.json();
+    document.getElementById('nameResult').textContent = data.full_name;
 });

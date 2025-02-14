@@ -49,7 +49,7 @@ app.get('/meme', async (req, res) => {
   try {
     // Faire l'appel API à Meme API (https://meme-api.com/gimme)
     const response = await axios.get('https://meme-api.com/gimme');
-    
+
     // La réponse contient l'URL du mème
     const memeUrl = response.data.url;
 
@@ -66,7 +66,7 @@ app.get('/planet', (req, res) => {
 });
 
 // Route /plane pour récupérer les données avec la clé API
-app.get('/plane', async (req, res) => {
+app.get('/data', async (req, res) => {
   try {
     // Récupérer la clé API depuis les variables d'environnement
     const apiKey = process.env.API_KEY;
@@ -85,6 +85,9 @@ app.get('/plane', async (req, res) => {
     res.status(500).json({ error: 'Erreur interne de serveur' });
   }
 });
+
+
+
 
 // Exporter l'application pour l'utiliser dans le fichier www
 module.exports = app;
